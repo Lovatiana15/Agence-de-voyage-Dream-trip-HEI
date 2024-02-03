@@ -1,7 +1,13 @@
 # Agence-de-voyage-Dream-trip-HEI
-Ce référentiel contient le code source du back-end développé dans le cadre d'un projet universitaire visant la création d'une application web pour une agence de voyage. 
+
+This repository contains the source code for the back-end developed as part of a university project to create a web application for a travel agency.
 
 # Configuration database:
+
 in ressource/application.propreties change:
 spring.datasource.username=your username
-spring.datasource.password=your password
+spring.datasource.password=password
+
+# MCD:
+
+![Alt text](<Capture d'écran 2024-02-03 041237.png>)
