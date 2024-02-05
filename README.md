@@ -10,4 +10,4 @@ spring.datasource.password=password
 
 # MCD:
 
-![Alt text](<Capture d'écran 2024-02-03 041237.png>)
+![mcdlogin.png](mcdlogin.png)
