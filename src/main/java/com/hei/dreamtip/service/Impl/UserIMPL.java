@@ -33,7 +33,18 @@ public class UserIMPL implements UserService {
         userRepo.save(user);
         return user.getUsername();
     }
-
+    @Override
+    public void save(UserDTO userDTO) {
+        User user = new User(
+                userDTO.getUserId(),
+                userDTO.getUsername(),
+                userDTO.getUserLastName(),
+                userDTO.getEmail(),
+                userDTO.getPhoneNumber(),
+                this.passwordEncoder.encode(userDTO.getPassword())
+        );
+        userRepo.save(user);
+    }
     @Override
     public LoginMessage loginUser(LoginDTO loginDTO) {
         String msg = "";
