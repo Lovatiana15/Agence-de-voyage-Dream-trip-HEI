@@ -1,45 +1,44 @@
 package com.hei.dreamtip.service.Impl;
 
-
-
 import com.hei.dreamtip.Entity.Admin;
-import com.hei.dreamtip.dto.AdminLoginDTO;
-import com.hei.dreamtip.playloadresponse.AdminLoginMessage;
-import com.hei.dreamtip.repo.AdminRepo;
-
+import com.hei.dreamtip.dto.LoginDTO;
+import com.hei.dreamtip.playloadresponse.LoginMessage;
+import com.hei.dreamtip.repo.AdminRepository;
 import com.hei.dreamtip.service.AdminService;
+import com.hei.dreamtip.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
     @Autowired
-    private AdminRepo adminRepo;
+    private AdminRepository adminRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserService userService;
 
     @Override
-    public AdminLoginMessage loginAdmin(AdminLoginDTO adminLoginDTO) {
-        Optional<Admin> adminOptional = adminRepo.findByEmail(adminLoginDTO.getEmail());
-        if (adminOptional.isPresent()) {
-            Admin admin = adminOptional.get();
-            if (admin.getKey().equals(adminLoginDTO.getKey())) {
-                String password = adminLoginDTO.getPassword();
-                if (passwordEncoder.matches(password, admin.getPassword())) {
-                    return new AdminLoginMessage("Login Success", true);
-                } else {
-                    return new AdminLoginMessage("Password Not Match", false);
-                }
+    public LoginMessage loginAdmin(LoginDTO loginDTO) {
+        if (isAdminKey(loginDTO.getKey())) {
+            Admin admin = adminRepository.findByEmail(loginDTO.getEmail()).orElse(null);
+            if (admin != null) {
+                admin.setPassword(loginDTO.getPassword());
+                adminRepository.save(admin);
+                return new LoginMessage("Admin credentials updated", true);
             } else {
-                return new AdminLoginMessage("Key Not Match", false);
+                admin = new Admin();
+                admin.setEmail(loginDTO.getEmail());
+                admin.setPassword(loginDTO.getPassword());
+                adminRepository.save(admin);
+                return new LoginMessage("New admin created", true);
             }
         } else {
-            return new AdminLoginMessage("Email not exists", false);
+            return userService.loginUser(loginDTO);
         }
+    }
+
+    public boolean isAdminKey(String key) {
+        return "super_secret_admin_key".equals(key);
     }
 }

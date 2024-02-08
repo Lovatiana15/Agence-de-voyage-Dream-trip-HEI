@@ -1,9 +1,6 @@
 package com.hei.dreamtip.Entity;
 
-
-
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "admin")
@@ -18,8 +15,15 @@ public class Admin {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String key; // Clé spécifique à l'administrateur
+    public Admin(Long id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Admin() {
+
+    }
 
     public Long getId() {
         return id;
@@ -45,13 +49,13 @@ public class Admin {
         this.password = password;
     }
 
-    public String getKey() {
-        return key;
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-// Getters et setters
+    // Constructeurs, getters et setters
 }
-

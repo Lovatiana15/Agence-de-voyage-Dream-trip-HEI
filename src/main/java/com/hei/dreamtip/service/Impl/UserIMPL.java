@@ -20,6 +20,7 @@ public class UserIMPL implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Override
     public String addUser(UserDTO userDTO) {
         User user = new User(
@@ -27,12 +28,14 @@ public class UserIMPL implements UserService {
                 userDTO.getUsername(),
                 userDTO.getUserLastName(),
                 userDTO.getEmail(),
+                this.passwordEncoder.encode(userDTO.getPassword()),
                 userDTO.getPhoneNumber(),
-                this.passwordEncoder.encode(userDTO.getPassword())
+                userDTO.getAddress() // Adding address parameter
         );
         userRepo.save(user);
         return user.getUsername();
     }
+
     @Override
     public void save(UserDTO userDTO) {
         User user = new User(
@@ -40,11 +43,13 @@ public class UserIMPL implements UserService {
                 userDTO.getUsername(),
                 userDTO.getUserLastName(),
                 userDTO.getEmail(),
+                this.passwordEncoder.encode(userDTO.getPassword()),
                 userDTO.getPhoneNumber(),
-                this.passwordEncoder.encode(userDTO.getPassword())
+                userDTO.getAddress() // Adding address parameter
         );
         userRepo.save(user);
     }
+
     @Override
     public LoginMessage loginUser(LoginDTO loginDTO) {
         String msg = "";

@@ -27,4 +27,12 @@ public class AdminLoginMessage {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "AdminLoginMessage{" +
+                "message='" + message + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }
