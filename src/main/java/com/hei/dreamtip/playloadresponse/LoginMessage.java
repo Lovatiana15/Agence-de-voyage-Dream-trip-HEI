@@ -19,4 +19,12 @@ public class LoginMessage {
         this.message = message;
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "LoginMessage{" +
+                "message='" + message + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

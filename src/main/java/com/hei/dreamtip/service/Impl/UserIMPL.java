@@ -7,8 +7,6 @@ import com.hei.dreamtip.playloadresponse.LoginMessage;
 import com.hei.dreamtip.repo.UserRepo;
 import com.hei.dreamtip.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,9 +16,6 @@ public class UserIMPL implements UserService {
     @Autowired
     private UserRepo userRepo;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public String addUser(UserDTO userDTO) {
         User user = new User(
@@ -28,9 +23,9 @@ public class UserIMPL implements UserService {
                 userDTO.getUsername(),
                 userDTO.getUserLastName(),
                 userDTO.getEmail(),
-                this.passwordEncoder.encode(userDTO.getPassword()),
+                userDTO.getPassword(), // Utilisez le mot de passe tel quel
                 userDTO.getPhoneNumber(),
-                userDTO.getAddress() // Adding address parameter
+                userDTO.getAddress()
         );
         userRepo.save(user);
         return user.getUsername();
@@ -43,9 +38,9 @@ public class UserIMPL implements UserService {
                 userDTO.getUsername(),
                 userDTO.getUserLastName(),
                 userDTO.getEmail(),
-                this.passwordEncoder.encode(userDTO.getPassword()),
+                userDTO.getPassword(), // Utilisez le mot de passe tel quel
                 userDTO.getPhoneNumber(),
-                userDTO.getAddress() // Adding address parameter
+                userDTO.getAddress()
         );
         userRepo.save(user);
     }
@@ -56,15 +51,9 @@ public class UserIMPL implements UserService {
         User user = userRepo.findByEmail(loginDTO.getEmail());
         if (user != null) {
             String password = loginDTO.getPassword();
-            String encodedPassword = user.getPassword();
-            boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
-            if (isPwdRight) {
-                Optional<User> optionalUser = userRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
-                if (optionalUser.isPresent()) {
-                    return new LoginMessage("Login Success", true);
-                } else {
-                    return new LoginMessage("Login Failed", false);
-                }
+            String storedPassword = user.getPassword();
+            if (password.equals(storedPassword)) { // Comparaison de mots de passe sans hachage
+                return new LoginMessage("Login Success", true);
             } else {
                 return new LoginMessage("Password Not Match", false);
             }

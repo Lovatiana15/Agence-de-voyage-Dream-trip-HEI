@@ -57,5 +57,5 @@ public class Admin {
                 ", password='" + password + '\'' +
                 '}';
     }
-    // Constructeurs, getters et setters
+
 }
