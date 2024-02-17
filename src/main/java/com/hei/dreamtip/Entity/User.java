@@ -25,15 +25,26 @@ public class User {
     @Column(name = "phone_number", length = 20)
     private String phoneNumber;
 
-    public User(int userId, String username, String userLastName, String email, String password, String phoneNumber) {
-    }
+    @Column(name = "address", length = 255) // Adding address field
+    private String address;
 
-    public User(String username, String userLastName, String email, String password, String phoneNumber) {
+    public User(int userId, String username, String userLastName, String email, String password, String phoneNumber, String address) {
+        this.userId = userId;
         this.username = username;
         this.userLastName = userLastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+
+    public User(String username, String userLastName, String email, String password, String phoneNumber, String address) {
+        this.username = username;
+        this.userLastName = userLastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
     public User() {
@@ -90,6 +101,14 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -99,6 +118,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
+

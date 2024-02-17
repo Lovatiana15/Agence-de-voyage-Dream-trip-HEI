@@ -6,18 +6,20 @@ public class UserDTO {
     private String userLastName;
     private String email;
     private String password;
-    private String phoneNumber; // Ajout du champ phoneNumber
+    private String phoneNumber;
+    private String address; // Added address field
 
     public UserDTO() {
     }
 
-    public UserDTO(int userId, String username, String userLastName, String email, String password, String phoneNumber) {
+    public UserDTO(int userId, String username, String userLastName, String email, String password, String phoneNumber, String address) {
         this.userId = userId;
         this.username = username;
         this.userLastName = userLastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.address = address; // Initialize address
     }
 
     public int getUserId() {
@@ -68,6 +70,14 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -77,6 +87,7 @@ public class UserDTO {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
