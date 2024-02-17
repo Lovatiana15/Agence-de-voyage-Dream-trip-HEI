@@ -31,7 +31,10 @@ public class UserController {
         String id = userService.addUser(userDTO);
         return id;
     }
-
+    @GetMapping("/ping")
+    public String ping(){
+        return "pong";
+    }
     @PostMapping(path = "/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO) {
         // Si la clé est fournie et correspond à celle d'un administrateur, utilisez le service d'administration pour gérer la connexion
