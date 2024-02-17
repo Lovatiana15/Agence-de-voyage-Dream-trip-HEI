@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@CrossOrigin
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping("api/v1/user")
 
