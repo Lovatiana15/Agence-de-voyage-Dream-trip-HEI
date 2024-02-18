@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @RequestMapping("api/v1/user")
-
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 
 
 public class UserController {
