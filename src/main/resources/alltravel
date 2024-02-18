@@ -1,0 +1,15 @@
+--for a single day--
+
+SELECT * FROM travel
+JOIN vehicle ON travel.id_vehicle = vehicle.id_vehicle
+JOIN town AS depart_town ON vehicle.id_town = depart_town.id_town
+JOIN town AS arrive_town ON travel.id_user = arrive_town.id_town
+WHERE travel.date_reservation::date = 'desired_date'::date;
+
+--for a specific day--
+
+SELECT * FROM travel
+JOIN vehicle ON travel.id_vehicle = vehicle.id_vehicle
+JOIN town AS depart_town ON vehicle.id_town = depart_town.id_town
+JOIN town AS arrive_town ON travel.id_user = arrive_town.id_town
+WHERE travel.date_reservation::date BETWEEN 'start_date'::date AND 'end_date'::date;

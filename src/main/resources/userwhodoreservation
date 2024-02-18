@@ -1,0 +1,3 @@
+SELECT DISTINCT a.name
+FROM app_user a
+JOIN reservation r ON a.id_user = r.id_user;

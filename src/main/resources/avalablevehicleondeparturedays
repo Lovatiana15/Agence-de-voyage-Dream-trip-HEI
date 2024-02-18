@@ -1,0 +1,6 @@
+SELECT DISTINCT v.*
+FROM vehicle v
+JOIN travel t ON v.id_vehicle = t.id_vehicle
+JOIN town depart_town ON v.id_town = depart_town.id_town
+JOIN town arrive_town ON t.id_user = arrive_town.id_town
+WHERE depart_town.name = 'A' AND arrive_town.name = 'B' AND t.placenumber < v.capacity AND t.date_reservation = 'desired date';

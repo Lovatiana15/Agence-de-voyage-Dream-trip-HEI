@@ -1,0 +1,8 @@
+SELECT r.id_reservation, t.id_travel, v.id_vehicle, v.vehicle_type, t.placenumber, t.online, d.name AS depart_town, a.name AS arrive_town
+FROM reservation r
+JOIN app_user u ON r.id_user = u.id_user
+JOIN travel t ON r.id_travel = t.id_travel
+JOIN vehicle v ON t.id_vehicle = v.id_vehicle
+JOIN town d ON v.id_town = d.id_town
+JOIN town a ON t.id_user = a.id_town
+WHERE r.id_reservation IS NOT NULL;

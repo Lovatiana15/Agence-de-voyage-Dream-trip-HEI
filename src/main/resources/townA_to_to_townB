@@ -1,0 +1,5 @@
+SELECT depart_town.name AS departure_city, arrive_town.name AS arrival_city
+FROM travel
+JOIN vehicle ON travel.id_vehicle = vehicle.id_vehicle
+JOIN town AS depart_town ON vehicle.id_town = depart_town.id_town
+JOIN town AS arrive_town ON travel.id_user = arrive_town.id_town;

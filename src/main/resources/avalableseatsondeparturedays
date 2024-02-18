@@ -1,0 +1,10 @@
+SELECT v.id_vehicle, v.vehicle_type, d.name AS depart_town, a.name AS arrive_town, v.capacity - t.total_seats AS available_seats
+FROM vehicle v
+JOIN town d ON v.id_town = d.id_town
+JOIN town a ON v.id_town = a.id_town
+JOIN (
+    SELECT id_vehicle, COUNT(*) AS total_seats
+    FROM travel
+    WHERE id_vehicle = v.id_vehicle AND placenumber > 0
+) t ON v.id_vehicle = t.id_vehicle
+WHERE d.name = 'A' AND a.name = 'B' AND v.capacity > t.total_seats;

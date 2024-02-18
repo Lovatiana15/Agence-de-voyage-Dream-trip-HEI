@@ -1,0 +1,7 @@
+SELECT v.id_vehicle, v.vehicle_type, d.name AS depart_town, a.name AS arrive_town, t.date_reservation, t.placenumber, t.online
+FROM vehicle v
+JOIN town AS depart_town ON v.id_town = depart_town.id_town
+JOIN town AS arrive_town ON v.id_town = arrive_town.id_town
+JOIN travel t ON v.id_vehicle = t.id_vehicle
+JOIN app_user u ON t.id_user = u.id_user
+WHERE t.date_reservation >= CURRENT_DATE AND (date_reservation - CURRENT_DATE) < INTERVAL '1 day' AND depart_town.name = 'A' AND arrive_town.name = 'B';

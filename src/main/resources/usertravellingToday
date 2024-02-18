@@ -1,0 +1,6 @@
+SELECT DISTINCT u.name
+FROM app_user u
+JOIN travel t ON u.id_user = t.id_user
+JOIN vehicle v ON t.id_vehicle = v.id_vehicle
+JOIN town d ON v.id_town = d.id_town
+WHERE t.date_reservation::date = CURRENT_DATE;
