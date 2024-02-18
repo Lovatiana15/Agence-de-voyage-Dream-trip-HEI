@@ -10,6 +10,13 @@ public class UserDTO {
     private String address; // Added address field
 
     public UserDTO() {
+        this.userId = 0; // You can set default values for integer fields, assuming 0 is appropriate
+        this.username = "";
+        this.userLastName = "";
+        this.email = "";
+        this.password = "";
+        this.phoneNumber = "";
+        this.address = "";
     }
 
     public UserDTO(int userId, String username, String userLastName, String email, String password, String phoneNumber, String address) {
@@ -90,6 +97,6 @@ public class UserDTO {
                 ", address='" + address + '\'' +
                 '}';
     }
+
+    // Getters and setters...
 }
-
-
