@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping("api/v1/user")
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 
-
 public class UserController {
     @Autowired
     private UserService userService;
